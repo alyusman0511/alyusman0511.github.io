@@ -134,7 +134,7 @@ new Vue({
          .setFont("helvetica")
          .setFontSize(12)
          .text(this.moreText, 0.5, 3.5, { align: "left", maxWidth: "7.5" });
-       */
+       
       // Creating footer and saving file
       doc
         .setFont("times")
@@ -145,7 +145,7 @@ new Vue({
           "This is a simple footer located .5 inches from page bottom",
           0.5,
           doc.internal.pageSize.height - 0.5
-        );
+        ); */
       /*
 doc.output('save', 'filename.pdf'); //Try to save PDF as a file (not works on ie before 10, and some mobile devices)
 doc.output('datauristring');        //returns the data uri string
