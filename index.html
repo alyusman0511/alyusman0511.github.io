@@ -29,10 +29,16 @@
                         v-model="kop.nama"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="6">
+                    <v-col cols="10" md="4">
                       <v-text-field
                         label="Alamat"
                         v-model="kop.alamat"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="2" md="2">
+                      <v-text-field
+                        label="No. Faktur"
+                        v-model="kop.invoiceKe"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" md="6">
@@ -44,12 +50,14 @@
                     <v-col cols="3" md="1">
                       <v-text-field
                         label="QTY"
+                        type="number"
                         v-model="add.qty"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="5" md="3">
                       <v-text-field
                         label="Harga"
+                        type="number"
                         v-model="add.unitPrice"
                       ></v-text-field>
                     </v-col>

@@ -5,7 +5,7 @@ new Vue({
     kop: {
       nama: null,
       alamat: null,
-      invoiceKe: 19,
+      invoiceKe: 1,
       tgl: null,
     },
     keranjangBarang: [],
