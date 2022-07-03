@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/MaterialDesign/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../assets/vuetify/dist/vuetify.min.css">
+  <!--link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet"-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+  <div id="app">
+    <v-app>
+      <v-main>
+        <v-container>
+          <v-card>
+            <v-toolbar color="info" class="elevation-0" dark  >
+              Form Invoice Toko Indrajaya
+            </v-toolbar>
+            <v-card-text>
+              <v-card class="elevation-1" outline>
+                <v-card-text >
+                  <v-row>
+                    <v-col cols="12" md="6">
+                      <v-text-field
+                        label="Nama"
+                        v-model="kop.nama"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-text-field
+                        label="Alamat"
+                        v-model="kop.alamat"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" md="6">
+                      <v-text-field
+                        label="Nama Barang"
+                        v-model="add.description"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="3" md="1">
+                      <v-text-field
+                        label="QTY"
+                        v-model="add.qty"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="5" md="3">
+                      <v-text-field
+                        label="Harga"
+                        v-model="add.unitPrice"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="4" md="2">
+                      <v-btn color="success" block class="elevation-0 mt-4" @click="addKeranjang">Simpan</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+
+              <v-card>
+                <v-card-text>
+                  <template>
+                    <v-simple-table>
+                      <template v-slot:default>
+                        <thead>
+                          <tr>
+                            <th class="text-right">QTY</th>
+                            <th class="text-left">Description</th>
+                            <th class="text-right">Unit Price</th>
+                            <th class="text-right">Amount</th>
+                            <th class="text-center">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(item) in keranjangBarang">
+                            <td class="text-right">{{ item.qtyTampil }}</td>
+                            <td>{{ item.description }}</td>
+                            <td class="text-right">{{ item.unitPriceTampil }}</td>
+                            <td class="text-right">{{ item.amountTampil }}</td>
+                            <td class="text-center">
+                              <v-btn color="warning" small icon @click="setEdit(item)">
+                                <v-icon>mdi-pencil</v-icon>
+                              </v-btn>
+                              <v-btn color="error" small icon @click="hapusItem(item)">
+                                <v-icon>mdi-delete</v-icon>
+                              </v-btn>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="5" class="text-left">
+                              <strong> Total Tagihan: Rp. {{totalBelanja}},00</strong>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="5" class="text-left">
+                              Terbilang: berapa ratus ribuan
+                            </td>
+                          </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
+                  </template>
+                  <v-divider></v-divider>
+                  <v-spacer></v-spacer>
+                  <v-btn color="info" small @click="simpanPdf"><span><v-icon>mdi-printer</v-icon></span>Simpan PDF</v-btn>
+                  
+                </v-card-text>
+              </v-card>
+
+            </v-card-text>
+          </v-card>
+
+          <v-dialog
+            v-model="dialogEdit"
+            scrollable 
+            persistent :overlay="false"
+            max-width="500px"
+            transition="dialog-transition"
+          >
+            <v-card>
+              <v-toolbar color="warning" dark class="elevation-0">
+                <v-toolbar-title>
+                  Update Data Barang
+                </v-toolbar-title>
+              </v-toolbar>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="Nama Barang"
+                      v-model="add.description"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="QTY"
+                      v-model="add.qty"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-text-field
+                      label="Harga"
+                      v-model="add.unitPrice"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="6" justify-center>
+                    <v-btn color="success" block class="elevation-0 mt-4" @click="updateKeranjang">Simpan</v-btn>
+                    </v-col>
+                    <v-col cols="6" justify-center>
+                    <v-btn color="error" block class="elevation-0 mt-4" @click="dialogEdit = false">Batal</v-btn>
+                  </v-col>
+                </v-row>
+
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
+
+  <!--script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script-->
+  <script src="./assets/vue/dist/vue.js"></script>
+  <script src="./assets/axios/dist/axios.js"></script>
+  <script src="./assets/vuetify/dist/vuetify.min.js"></script>
+  <script src="./assets/jspdf/jspdf.min.js"></script>
+  <script src="./assets/jspdf/jspdf.plugin.autotable1.js"></script>
+  <script src="./js/invoice.js"></script>
+
+  <script>
+
+  </script>
+</body>
+
+</html>
