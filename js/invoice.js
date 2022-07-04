@@ -132,6 +132,7 @@ new Vue({
          margin: { left: 1.5, top: 8.0 }
        });
        let ln = this.keranjangBarang.length * 0.7;
+       console.log(ln);
        doc.text('Total : '+this.formatRupiah(this.totalBelanja, 'Rp.'), 15, (8.0+ln));
        doc.text('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah', 15, (1+8.0+ln));
       // Using array of sentences
