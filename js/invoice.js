@@ -133,7 +133,7 @@ new Vue({
        });
        let ln = this.keranjangBarang.length * 0.7;
        doc.text('Total : '+this.formatRupiah(this.totalBelanja, 'Rp.'), 15, (8.0+ln));
-       doc.text('Total : '+this.formatRupiah('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah'), 15, (1+8.0+ln));
+       doc.text('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah', 15, (1+8.0+ln));
       // Using array of sentences
       /* doc
          .setFont("helvetica")
