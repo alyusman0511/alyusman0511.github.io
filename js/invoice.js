@@ -19,6 +19,9 @@ new Vue({
     totalBelanja: 0,
     dialogEdit: false,
   },
+  created (){
+    this.$refs.refKopNama.focus()
+  },
 
   methods: {
     addKeranjang() {
@@ -40,7 +43,7 @@ new Vue({
       this.keranjangBarang.push(dorong);
       this.totalFinal();
       this.kosongForm();
-      this.refs.refNamaBarang.focus();
+      this.$refs.refNamaBarang.focus();
     },
     kosongForm() {
       this.add.qty = null
