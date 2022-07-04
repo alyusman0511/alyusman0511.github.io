@@ -150,7 +150,7 @@ new Vue({
       });
       let ln = (this.keranjangBarang.length * 0.8) + 8.3;
       console.log('ini ln: ', this.keranjangBarang.length);
-      doc.text(' || Total : ' + this.totalBelanjaString, 14, ln);
+      doc.text('  Total: ' + this.totalBelanjaString+',00', 14, ln);
       doc.text('Terbilang: '+this.terbilang(this.totalBelanjaAngka)+' Rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
       // Using array of sentences
       /* doc
