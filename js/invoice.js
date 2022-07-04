@@ -50,8 +50,6 @@ new Vue({
       this.totalFinal();
       this.kosongForm();
       this.$refs.refNamaBarang.focus();
-      //ini update saya
-      console.log('ini terbilang : ', this.terbilang(parseInt(this.totalBelanja)));
     },
     kosongForm() {
       this.add.qty = null
@@ -59,7 +57,7 @@ new Vue({
       this.add.unitPrice = null
     },
     totalFinal() {
-      this.totalBelanja = 0;
+      this.totalBelanjaAngka = 0;
       for (let i = 0; i < this.keranjangBarang.length; i++) {
         const element = this.keranjangBarang[i];
         this.totalBelanjaAngka += parseInt(element.amount)
@@ -67,6 +65,7 @@ new Vue({
       }
       this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.');
       console.log('total string: ' , this.totalBelanjaString);
+      console.log('total terbilang: ', this.terbilang(this.totalBelanjaAngka));
     },
     setEdit(item) {
       this.add.no = item.no
