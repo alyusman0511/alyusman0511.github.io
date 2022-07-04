@@ -12,6 +12,7 @@ new Vue({
     add: {
       no: 0,
       qty: null,
+      satuan: null,
       description: null,
       unitPrice: null,
       amount: null,
@@ -19,20 +20,22 @@ new Vue({
     totalBelanja: 0,
     dialogEdit: false,
   },
-  created (){
+  created() {
     this.$refs.refKopNama.focus()
   },
 
   methods: {
     addKeranjang() {
-      if(this.add.qty == '' || this.add.unitPrice == '') return false;
+      if (this.add.qty == '' || this.add.unitPrice == '' || this.add.satuan == '') return false;
       const qq = this.add.qty
-        const uu = this.add.unitPrice
-        const a = this.add.qty * this.add.unitPrice
+      const ss = this.add.satuan
+      const uu = this.add.unitPrice
+      const a = this.add.qty * this.add.unitPrice
 
       const dorong = {
         no: this.add.no + 1,
         qty: qq,
+        satuan: ss,
         qtyTampil: this.formatAngka(qq.toString()),
         description: this.add.description,
         unitPrice: this.add.unitPrice,
@@ -63,8 +66,9 @@ new Vue({
     setEdit(item) {
       this.add.no = item.no
       this.add.qty = item.qty
-      this.add.description = item.description,
-        this.add.unitPrice = item.unitPrice
+      this.add.satuan = item.satuan
+      this.add.description = item.description
+      this.add.unitPrice = item.unitPrice
       this.dialogEdit = true
     },
     updateKeranjang() {
@@ -73,10 +77,11 @@ new Vue({
       });
       if (index !== -1) {
         const qq = this.add.qty,
-        uu = this.add.unitPrice,
-        a = this.add.qty * this.add.unitPrice;
+          uu = this.add.unitPrice,
+          a = this.add.qty * this.add.unitPrice;
 
         this.keranjangBarang[index].qty = this.add.qty
+        this.keranjangBarang[index].satuan = this.add.satuan
         this.keranjangBarang[index].unitPrice = this.add.unitPrice
         this.keranjangBarang[index].amount = 0 + (this.add.qty * this.add.unitPrice)
         this.keranjangBarang[index].qtyTampil = this.formatAngka(qq.toString())
@@ -97,17 +102,18 @@ new Vue({
       this.totalFinal()
     },
     simpanPdf() {
-      if(this.kop.nama == '' || this.kop.invoiceKe == '0') return false;
+      if (this.kop.nama == '' || this.kop.invoiceKe == '0') return false;
       const d = new Date();
       const th = d.getFullYear();
       const bl = d.getMonth().toString();
-      const bbl = (bl.length < 2) ? '0'+bl : bl;
+      const bbl = (bl.length < 2) ? '0' + bl : bl;
       const tg = d.getDay().toString();
-      const ttg = (tg.length < 2) ? '0'+tg : tg;
-      this.kop.tgl = th+'/'+bbl+'/'+ttg;
+      const ttg = (tg.length < 2) ? '0' + tg : tg;
+      this.kop.tgl = th + '/' + bbl + '/' + ttg;
 
       const columns = [
         { title: "QTY", dataKey: "qtyTampil" },
+        { title: "Satuan", dataKey: "satuan" },
         { title: "Keterangan", dataKey: "description" },
         { title: "Harga", dataKey: "unitPriceTampil" },
         { title: "Subtotal", dataKey: "amountTampil" }
@@ -125,20 +131,20 @@ new Vue({
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama}\n${this.kop.alamat}`, 1.5, 4.5);
 
       doc.setFontSize(12).setFontStyle("bold").text(`No. Faktur \nTanggal Faktur`, 12, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}`+`\n${this.kop.tgl}`, 17, 4.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}`, 17, 4.5);
       // create a line under heading
       //titik awal garis , posisi tinggi garis , panjang , titik akhir garis
       // doc.setLineWidth(0.01).line(0.5, 0.6, 8.0, 0.6);
       // Using autoTable plugin
-       doc.autoTable({
-         columns,
-         body: this.keranjangBarang,
-         margin: { left: 1.5, top: 7.0 }
-       });
-       let ln = (this.keranjangBarang.length * 0.8)+8.3;
-       console.log('ini ln: ' ,this.keranjangBarang.length);
-       doc.text('Total : '+this.formatRupiah(this.totalBelanja, 'Rp.'), 13, ln);
-       doc.text('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah', 1.5, ln, { align: "left", maxWidth: "11.5" });
+      doc.autoTable({
+        columns,
+        body: this.keranjangBarang,
+        margin: { left: 1.5, top: 7.0 }
+      });
+      let ln = (this.keranjangBarang.length * 0.8) + 8.3;
+      console.log('ini ln: ', this.keranjangBarang.length);
+      doc.text('Total : ' + this.formatRupiah(this.totalBelanja, 'Rp.'), 13, ln);
+      doc.text('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah', 1.5, ln, { align: "left", maxWidth: "11.5" });
       // Using array of sentences
       /* doc
          .setFont("helvetica")

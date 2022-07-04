@@ -42,21 +42,27 @@
                         v-model="kop.invoiceKe"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="6">
+                    <v-col cols="12" md="4">
                       <v-text-field
                         label="Nama Barang"
                         v-model="add.description"
                         ref="refNamaBarang"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="3" md="1">
+                    <v-col cols="2" md="1">
                       <v-text-field
                         label="QTY"
                         type="number"
                         v-model="add.qty"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="5" md="3">
+                    <v-col cols="3" md="2">
+                      <v-text-field
+                        label="Sat"
+                        v-model="add.satuan"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="4" md="3">
                       <v-text-field
                         label="Harga"
                         type="number"
@@ -64,7 +70,7 @@
                         @keyup.enter="addKeranjang"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="4" md="2">
+                    <v-col cols="3" md="2">
                       <v-btn color="success" block class="elevation-0 mt-4" @click="addKeranjang">Simpan</v-btn>
                     </v-col>
                   </v-row>
