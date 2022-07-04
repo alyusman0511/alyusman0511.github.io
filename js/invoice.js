@@ -19,12 +19,13 @@ new Vue({
     },
     totalBelanjaAngka: 0,
     totalBelanjaString: null,
-    totalTerbilang: null,
+    totalBelanjaTerbilang: null,
     dialogEdit: false,
   },
   mounted() {
-    this.$refs.refKopNama.focus()
-    this.totalTerbilang = this.terbilang(parseInt(this.totalBelanjaAngka));
+    this.$refs.refKopNama.focus();
+    this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka, 'Rp.')
+    this.totalBelanjaTerbilang = this.terbilang(parseInt(this.totalBelanjaAngka));
   },
 
   methods: {
@@ -61,11 +62,12 @@ new Vue({
       for (let i = 0; i < this.keranjangBarang.length; i++) {
         const element = this.keranjangBarang[i];
         this.totalBelanjaAngka += parseInt(element.amount)
-        console.log('total angka : ', this.totalBelanjaAngka);
       }
       this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.');
+      this.totalBelanjaTerbilang = this.terbilang(this.totalBelanjaAngka);
+      console.log('total angka : ', this.totalBelanjaAngka);
       console.log('total string: ' , this.totalBelanjaString);
-      console.log('total terbilang: ', this.terbilang(this.totalBelanjaAngka));
+      console.log('total terbilang: ', this.totalBelanjaTerbilang);
     },
     setEdit(item) {
       this.add.no = item.no
