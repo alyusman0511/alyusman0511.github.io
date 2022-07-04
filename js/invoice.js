@@ -5,7 +5,7 @@ new Vue({
     kop: {
       nama: null,
       alamat: null,
-      invoiceKe: 1,
+      invoiceKe: 0,
       tgl: null,
     },
     keranjangBarang: [],
@@ -22,9 +22,10 @@ new Vue({
 
   methods: {
     addKeranjang() {
-      const qq = this.add.qty,
-        uu = this.add.unitPrice,
-        a = this.add.qty * this.add.unitPrice;
+      if(this.add.qty == '' || this.add.unitPrice == '') return false;
+      const qq = this.add.qty
+        const uu = this.add.unitPrice
+        const a = this.add.qty * this.add.unitPrice
 
       const dorong = {
         no: this.add.no + 1,
@@ -92,6 +93,7 @@ new Vue({
       this.totalFinal()
     },
     simpanPdf() {
+      if(this.kop.nama == '' || this.kop.invoiceKe == '0') return false;
       const d = new Date();
       const th = d.getFullYear();
       const bl = d.getMonth().toString();
@@ -115,11 +117,11 @@ new Vue({
       doc.setFontSize(14).setFontStyle("bold").text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").text('PASURUAN \n(+62)81336554778', 1.5, 2.5);
       doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.5, 1.5);
-      doc.setFontSize(12).setFontStyle("bold").text(`Yth. Pelanggan`, 1.5, 6.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama}\n${this.kop.alamat}`, 1.5, 6.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`Yth. Pelanggan`, 1.5, 4.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama}\n${this.kop.alamat}`, 1.5, 4.5);
 
-      doc.setFontSize(12).setFontStyle("bold").text(`No. Faktur \nTanggal Faktur`, 12, 6.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}`+`\n${this.kop.tgl}`, 17, 6.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`No. Faktur \nTanggal Faktur`, 12, 4.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}`+`\n${this.kop.tgl}`, 17, 4.5);
       // create a line under heading
       //titik awal garis , posisi tinggi garis , panjang , titik akhir garis
       // doc.setLineWidth(0.01).line(0.5, 0.6, 8.0, 0.6);
@@ -127,8 +129,11 @@ new Vue({
        doc.autoTable({
          columns,
          body: this.keranjangBarang,
-         margin: { left: 1.5, top: 10 }
-       }); 
+         margin: { left: 1.5, top: 8.0 }
+       });
+       let ln = this.keranjangBarang.length * 0.7;
+       doc.text('Total : '+this.formatRupiah(this.totalBelanja, 'Rp.'), 15, (8.0+ln));
+       doc.text('Total : '+this.formatRupiah('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah'), 15, (1+8.0+ln));
       // Using array of sentences
       /* doc
          .setFont("helvetica")
