@@ -24,7 +24,7 @@ new Vue({
   },
   mounted() {
     this.$refs.refKopNama.focus();
-    this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka, 'Rp.')
+    this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.')
     this.totalBelanjaTerbilang = this.terbilang(parseInt(this.totalBelanjaAngka));
   },
 
