@@ -17,13 +17,14 @@ new Vue({
       unitPrice: null,
       amount: null,
     },
-    totalBelanja: 0,
+    totalBelanjaAngka: 0,
+    totalBelanjaString: null,
     totalTerbilang: null,
     dialogEdit: false,
   },
   mounted() {
     this.$refs.refKopNama.focus()
-    this.totalTerbilang = this.terbilang(parseInt(this.totalBelanja));
+    this.totalTerbilang = this.terbilang(parseInt(this.totalBelanjaAngka));
   },
 
   methods: {
@@ -61,10 +62,10 @@ new Vue({
       this.totalBelanja = 0;
       for (let i = 0; i < this.keranjangBarang.length; i++) {
         const element = this.keranjangBarang[i];
-        this.totalBelanja += parseInt(element.amount)
-        console.log('total ' + this.totalBelanja);
+        this.totalBelanjaAngka += parseInt(element.amount)
+        console.log('total ' + this.totalBelanjaAngka);
       }
-      this.totalBelanja = this.formatAngka(this.totalBelanja.toString());
+      this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.');
       console.log(this.totalBelanja);
     },
     setEdit(item) {
@@ -148,8 +149,8 @@ new Vue({
       });
       let ln = (this.keranjangBarang.length * 0.8) + 8.3;
       console.log('ini ln: ', this.keranjangBarang.length);
-      doc.text(' || Total : ' + this.formatRupiah(this.totalBelanja, 'Rp.'), 14, ln);
-      doc.text('Terbilang: '+this.terbilang(parseInt(this.totalBelanja)), 1.5, ln, { align: "left", maxWidth: "11.5" });
+      doc.text(' || Total : ' + this.totalBelanjaString, 14, ln);
+      doc.text('Terbilang: '+this.terbilang(this.totalBelanjaAngka), 1.5, ln, { align: "left", maxWidth: "11.5" });
       // Using array of sentences
       /* doc
          .setFont("helvetica")
