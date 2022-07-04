@@ -20,7 +20,7 @@ new Vue({
     totalBelanja: 0,
     dialogEdit: false,
   },
-  created() {
+  mounted() {
     this.$refs.refKopNama.focus()
   },
 
