@@ -21,6 +21,9 @@ new Vue({
     totalBelanjaString: null,
     totalBelanjaTerbilang: null,
     dialogEdit: false,
+
+    ////
+    htmlhidden: false
   },
   mounted() {
     this.$refs.refKopNama.focus();
@@ -29,7 +32,26 @@ new Vue({
   },
 
   methods: {
+    focusInputAlamat(){
+      this.$refs.refKopAlamat.focus();
+    },
+    focusInputNoInvoice(){
+      this.$refs.refKopInvoiceKe.focus();
+    },
+    focusInputNamaBarang(){
+      this.$refs.refNamaBarang.focus();
+    },
+    focusInputQty(){
+      this.$refs.inputQty.focus();
+    },
+    focusInputSatuan(){
+      this.$refs.inputSatuan.focus();
+    },
+    focusInputHarga(){
+      this.$refs.inputHarga.focus();
+    },
     addKeranjang() {
+      if (this.add.qty == null || this.add.unitPrice == null || this.add.satuan == null) return false;
       if (this.add.qty == '' || this.add.unitPrice == '' || this.add.satuan == '') return false;
       const qq = this.add.qty
       const ss = this.add.satuan
@@ -39,9 +61,9 @@ new Vue({
       const dorong = {
         no: this.add.no + 1,
         qty: qq,
-        satuan: ss,
+        satuan: ss.toString().toUpperCase(),
         qtyTampil: this.formatAngka(qq.toString()),
-        description: this.add.description,
+        description: this.add.description.toString().toUpperCase(),
         unitPrice: this.add.unitPrice,
         unitPriceTampil: this.formatAngka(uu.toString()),
         amount: this.add.qty * this.add.unitPrice,
@@ -64,7 +86,7 @@ new Vue({
         this.totalBelanjaAngka += parseInt(element.amount)
       }
       this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.');
-      this.totalBelanjaTerbilang = this.terbilang(this.totalBelanjaAngka);
+      this.totalBelanjaTerbilang = this.terbilang(this.totalBelanjaAngka); //angkaTerbilang(this.totalBelanjaAngka);//
       console.log('total angka : ', this.totalBelanjaAngka);
       console.log('total string: ' , this.totalBelanjaString);
       console.log('total terbilang: ', this.totalBelanjaTerbilang);
@@ -135,7 +157,7 @@ new Vue({
       doc.setFontSize(12).setFontStyle("normal").text('PASURUAN \n(+62)81336554778', 1.5, 2.5);
       doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.5, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`Yth. Pelanggan`, 1.5, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama}\n${this.kop.alamat}`, 1.5, 4.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kop.alamat}`, 1.5, 4.5);
 
       doc.setFontSize(12).setFontStyle("bold").text(`No. Faktur \nTanggal Faktur`, 12, 4.5);
       doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}`, 17, 4.5);
@@ -256,10 +278,6 @@ doc.output('dataurlnewwindow');     //opens the data uri in new window
      
         return temp;
     },
-    berubah(angka){
-      let angkaTerbilang = new angkaTerbilang();
-      return angkaTerbilang(angka)
-    }
 
   }
 })

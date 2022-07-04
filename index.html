@@ -28,17 +28,22 @@
                         label="Nama"
                         v-model="kop.nama"
                         ref="refKopNama"
+                        @keyup.enter="focusInputAlamat"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="10" md="4">
                       <v-text-field
                         label="Alamat"
+                        ref="refKopAlamat"
+                        @keyup.enter="focusInputNoInvoice"
                         v-model="kop.alamat"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="2" md="2">
                       <v-text-field
                         label="No. Faktur"
+                        ref="refKopInvoiceKe"
+                        @keyup.enter="focusInputNamaBarang"
                         v-model="kop.invoiceKe"
                       ></v-text-field>
                     </v-col>
@@ -47,6 +52,7 @@
                         label="Nama Barang"
                         v-model="add.description"
                         ref="refNamaBarang"
+                        @keyup.enter="focusInputQty"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="2" md="1">
@@ -54,12 +60,16 @@
                         label="QTY"
                         type="number"
                         v-model="add.qty"
+                        ref="inputQty"
+                        @keyup.enter="focusInputSatuan"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="3" md="2">
                       <v-text-field
                         label="Sat"
                         v-model="add.satuan"
+                        ref="inputSatuan"
+                        @keyup.enter="focusInputHarga"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="4" md="3">
@@ -67,6 +77,7 @@
                         label="Harga"
                         type="number"
                         v-model="add.unitPrice"
+                        ref="inputHarga"
                         @keyup.enter="addKeranjang"
                       ></v-text-field>
                     </v-col>
@@ -84,7 +95,8 @@
                       <template v-slot:default>
                         <thead>
                           <tr>
-                            <th class="text-right">QTY</th>
+                            <th class="text-left">QTY</th>
+                            <th>Satuan</th>
                             <th class="text-left">Description</th>
                             <th class="text-right">Unit Price</th>
                             <th class="text-right">Amount</th>
@@ -93,7 +105,8 @@
                         </thead>
                         <tbody>
                           <tr v-for="(item) in keranjangBarang">
-                            <td class="text-right">{{ item.qtyTampil }}</td>
+                            <td class="text-left">{{ item.qtyTampil }}</td>
+                            <td>{{item.satuan}}</td>
                             <td>{{ item.description }}</td>
                             <td class="text-right">{{ item.unitPriceTampil }}</td>
                             <td class="text-right">{{ item.amountTampil }}</td>
@@ -106,23 +119,23 @@
                               </v-btn>
                             </td>
                           </tr>
-                          <tr>
+                          <!--tr>
                             <td colspan="5" class="text-left">
                               <strong> Total Tagihan: {{totalBelanjaString}},00</strong>
                             </td>
-                          </tr>
+                          </tr-->
                           <tr>
-                            <td colspan="5" class="text-left">
+                            <td colspan="4" class="text-left">
                               Terbilang: {{ totalBelanjaTerbilang }} Rupiah.
                             </td>
+                            <td colspan="2" class="text-right"><strong> Total Tagihan: {{totalBelanjaString}},00</strong></td>
                           </tr>
                         </tbody>
                       </template>
                     </v-simple-table>
                   </template>
                   <v-divider></v-divider>
-                  <v-spacer></v-spacer>
-                  <v-btn color="info" small @click="simpanPdf"><span><v-icon>mdi-printer</v-icon></span>Simpan PDF</v-btn>
+                  <v-btn color="info" class="mt-3" small @click="simpanPdf"><span><v-icon>mdi-printer</v-icon></span>Simpan PDF</v-btn>
                   
                 </v-card-text>
               </v-card>
