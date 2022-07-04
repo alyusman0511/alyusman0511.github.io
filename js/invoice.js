@@ -47,6 +47,7 @@ new Vue({
       this.totalFinal();
       this.kosongForm();
       this.$refs.refNamaBarang.focus();
+      //ini update saya
     },
     kosongForm() {
       this.add.qty = null
