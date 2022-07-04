@@ -18,10 +18,12 @@ new Vue({
       amount: null,
     },
     totalBelanja: 0,
+    totalTerbilang: null,
     dialogEdit: false,
   },
   mounted() {
     this.$refs.refKopNama.focus()
+    this.totalTerbilang = this.terbilang(parseInt(this.totalBelanja));
   },
 
   methods: {
