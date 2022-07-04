@@ -131,7 +131,7 @@ new Vue({
          body: this.keranjangBarang,
          margin: { left: 1.5, top: 7.0 }
        });
-       let ln = (this.keranjangBarang.length * 0.4)+8;
+       let ln = (this.keranjangBarang.length * 0.4)+8.3;
        console.log('ini ln: ' ,ln);
        doc.text('Total : '+this.formatRupiah(this.totalBelanja, 'Rp.'), 15, ln);
        doc.text('Terbilang: sepuluh juta limaratus delapan puluh ribu rupiah', 1.5, ln);
