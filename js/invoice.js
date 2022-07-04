@@ -39,7 +39,8 @@ new Vue({
       }
       this.keranjangBarang.push(dorong);
       this.totalFinal();
-      this.kosongForm()
+      this.kosongForm();
+      this.refs.refNamaBarang.focus();
     },
     kosongForm() {
       this.add.qty = null

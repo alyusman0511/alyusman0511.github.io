@@ -45,6 +45,7 @@
                       <v-text-field
                         label="Nama Barang"
                         v-model="add.description"
+                        ref="refNamaBarang"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="3" md="1">
@@ -59,6 +60,7 @@
                         label="Harga"
                         type="number"
                         v-model="add.unitPrice"
+                        @keyup.enter="addKeranjang"
                       ></v-text-field>
                     </v-col>
                     <v-col cols="4" md="2">
