@@ -63,10 +63,10 @@ new Vue({
       for (let i = 0; i < this.keranjangBarang.length; i++) {
         const element = this.keranjangBarang[i];
         this.totalBelanjaAngka += parseInt(element.amount)
-        console.log('total ' + this.totalBelanjaAngka);
+        console.log('total angka : ', this.totalBelanjaAngka);
       }
       this.totalBelanjaString = this.formatRupiah(this.totalBelanjaAngka.toString(), 'Rp.');
-      console.log(this.totalBelanja);
+      console.log('total string: ' , this.totalBelanjaString);
     },
     setEdit(item) {
       this.add.no = item.no
