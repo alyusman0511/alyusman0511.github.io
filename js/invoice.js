@@ -48,6 +48,7 @@ new Vue({
       this.kosongForm();
       this.$refs.refNamaBarang.focus();
       //ini update saya
+      console.log('ini terbilang : ', this.terbilang(parseInt(this.totalBelanja)));
     },
     kosongForm() {
       this.add.qty = null
@@ -103,6 +104,7 @@ new Vue({
       this.totalFinal()
     },
     simpanPdf() {
+      
       if (this.kop.nama == '' || this.kop.invoiceKe == '0') return false;
       const d = new Date();
       const th = d.getFullYear();
@@ -145,7 +147,7 @@ new Vue({
       let ln = (this.keranjangBarang.length * 0.8) + 8.3;
       console.log('ini ln: ', this.keranjangBarang.length);
       doc.text(' || Total : ' + this.formatRupiah(this.totalBelanja, 'Rp.'), 14, ln);
-      doc.text('Terbilang: '+this.terbilang(this.totalBelanja), 1.5, ln, { align: "left", maxWidth: "11.5" });
+      doc.text('Terbilang: '+this.terbilang(parseInt(this.totalBelanja)), 1.5, ln, { align: "left", maxWidth: "11.5" });
       // Using array of sentences
       /* doc
          .setFont("helvetica")
