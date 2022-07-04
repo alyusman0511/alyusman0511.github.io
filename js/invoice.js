@@ -210,7 +210,7 @@ doc.output('dataurlnewwindow');     //opens the data uri in new window
       rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
       return rupiah;
     },
-    terbilang(angka){
+    terbilang(nilai){
         nilai = Math.abs(nilai);
         let simpanNilaiBagi=0;
         const huruf = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
