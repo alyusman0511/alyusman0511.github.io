@@ -254,6 +254,10 @@ doc.output('dataurlnewwindow');     //opens the data uri in new window
         }
      
         return temp;
+    },
+    berubah(angka){
+      let angkaTerbilang = new angkaTerbilang();
+      return angkaTerbilang(angka)
     }
 
   }
