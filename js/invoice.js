@@ -141,6 +141,7 @@ new Vue({
       this.kop.tgl = th + '/' + bbl + '/' + ttg;
 
       const columns = [
+        { title: "No.", dataKey: "no" },
         { title: "QTY", dataKey: "qtyTampil" },
         { title: "Satuan", dataKey: "satuan" },
         { title: "Keterangan", dataKey: "description" },
@@ -155,7 +156,7 @@ new Vue({
       // text is placed using x, y coordinates
       doc.setFontSize(14).setFontStyle("bold").text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").text('PASURUAN \n(+62)81336554778', 1.5, 2.5);
-      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.5, 1.5);
+      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 12.0, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`Yth. Pelanggan`, 1.5, 4.5);
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kop.alamat}`, 1.5, 4.5);
 
@@ -165,9 +166,22 @@ new Vue({
       //titik awal garis , posisi tinggi garis , panjang , titik akhir garis
       // doc.setLineWidth(0.01).line(0.5, 0.6, 8.0, 0.6);
       // Using autoTable plugin
+      let bodycolom = [];
+      for(let i = 0; i < this.keranjangBarang.length; i++){
+        const el = this.keranjangBarang[i];
+        const dorong = {
+          no: i+1,
+          qtyTampil: el.qtyTampil,
+          satuan: el.satuan,
+          description: el.description,
+          unitPriceTampil: el.unitPriceTampil,
+          amountTampil: el.amountTampil
+        }
+        bodycolom.push(dorong)
+      }
       doc.autoTable({
         columns,
-        body: this.keranjangBarang,
+        body: bodycolom, //this.keranjangBarang,
         margin: { left: 1.5, top: 7.0 }
       });
       let ln = (this.keranjangBarang.length * 0.8) + 8.3;
