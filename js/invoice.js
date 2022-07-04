@@ -211,30 +211,49 @@ doc.output('dataurlnewwindow');     //opens the data uri in new window
       return rupiah;
     },
     terbilang(angka){
-
-      var bilne=["","satu","dua","tiga","empat","lima","enam","tujuh","delapan","sembilan","sepuluh","sebelas"];
-  
-      if(angka < 12){
-        return bilne[angka];
-      }else if(angka < 20){
-        return this.terbilang(angka-10)+" belas";
-      }else if(angka < 100){
-        return this.terbilang(Math.floor(parseInt(angka)/10))+" puluh "+this.terbilang(parseInt(angka)%10);
-      }else if(angka < 200){
-        return "seratus "+this.terbilang(parseInt(angka)-100);
-      }else if(angka < 1000){
-        return this.terbilang(Math.floor(parseInt(angka)/100))+" ratus "+this.terbilang(parseInt(angka)%100);
-      }else if(angka < 2000){
-        return "seribu "+this.terbilang(parseInt(angka)-1000);
-      }else if(angka < 1000000){
-        return this.terbilang(Math.floor(parseInt(angka)/1000))+" ribu "+this.terbilang(parseInt(angka)%1000);
-      }else if(angka < 1000000000){
-        return this.terbilang(Math.floor(parseInt(angka)/1000000))+" juta "+this.terbilang(parseInt(angka)%1000000);
-      }else if(angka < 1000000000000){
-        return this.terbilang(Math.floor(parseInt(angka)/1000000000))+" milyar "+this.terbilang(parseInt(angka)%1000000000);
-      }else if(angka < 1000000000000000){
-        return this.terbilang(Math.floor(parseInt(angka)/1000000000000))+" trilyun "+this.terbilang(parseInt(angka)%1000000000000);
-      }
+        nilai = Math.abs(nilai);
+        let simpanNilaiBagi=0;
+        const huruf = ["", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas"];
+        let temp="";
+     
+        if (nilai < 12) {
+            temp = " "+huruf[nilai];
+        }
+        else if (nilai <20) {
+            temp = pembilang(nilai - 10) + " Belas";
+        }
+        else if (nilai < 100) {
+            simpanNilaiBagi = Math.floor(nilai/10);
+            temp = pembilang(simpanNilaiBagi)+" Puluh"+ pembilang(nilai % 10);
+        }
+        else if (nilai < 200) {
+            temp = " Seratus" + pembilang(nilai - 100);
+        }
+        else if (nilai < 1000) {
+            simpanNilaiBagi = Math.floor(nilai/100);
+            temp = pembilang(simpanNilaiBagi) + " Ratus" + pembilang(nilai % 100);
+        }
+         else if (nilai < 2000) {
+            temp = " Seribu" + pembilang(nilai - 1000);
+        }
+        else if (nilai < 1000000) {
+            simpanNilaiBagi = Math.floor(nilai/1000);
+            temp = pembilang(simpanNilaiBagi) + " Ribu" + pembilang(nilai % 1000);
+        } 
+        else if (nilai < 1000000000) {
+            simpanNilaiBagi = Math.floor(nilai/1000000);
+            temp =pembilang(simpanNilaiBagi) + " Juta" + pembilang(nilai % 1000000);
+        } 
+        else if (nilai < 1000000000000) {
+            simpanNilaiBagi = Math.floor(nilai/1000000000);
+            temp = pembilang(simpanNilaiBagi) + " Miliar" + pembilang(nilai % 1000000000);
+        } 
+        else if (nilai < 1000000000000000) {
+            simpanNilaiBagi = Math.floor(nilai/1000000000000);
+            temp = pembilang(nilai/1000000000000) + " Triliun" + pembilang(nilai % 1000000000000);
+        }
+     
+        return temp;
     }
 
   }
