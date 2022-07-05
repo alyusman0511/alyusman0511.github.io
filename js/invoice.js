@@ -109,7 +109,7 @@ new Vue({
       b2 = this.kapitalisasiKata(b1[0]);
       let b3 = [b2];
       let c1 = b1.splice(1);
-      for(let i = 0; i < c1.length; i++){
+      for (let i = 0; i < c1.length; i++) {
         b3.push(c1[i])
       }
       this.totalBelanjaTerbilang = b3.join(' ');//this.kapitalisasiKata(angkaTerbilang(this.totalBelanjaAngka));//this.terbilang(this.totalBelanjaAngka); //
@@ -187,14 +187,14 @@ new Vue({
         format: "a4"//letter"
       });
       // text is placed using x, y coordinates
-      doc.setFontSize(14).setFontStyle("bold").text('TOKO PLASTIK SAYA', 1.5, 1.5);
-      doc.setFontSize(12).setFontStyle("normal").text('PASURUAN \nTELP. 081336554778', 1.5, 2.5);
+      doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
+      doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. 081336554778', 1.5, 2.0);
       doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.0, 1.5);
-      doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 4.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
-      doc.setFontSize(12).setFontStyle("bold").text(`NO. FAKTUR \nTANGGAL/KIRIM \nTGL. JATUH TEMPO`, 12, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}` + `\n${this.kop.jthTempo}`, 17, 4.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`NO. FAKTUR \nTANGGAL/KIRIM \nTGL. JATUH TEMPO`, 11, 3.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}` + `\n${this.kop.jthTempo}`, 16, 3.5);
       // create a line under heading
       //titik awal garis , posisi tinggi garis , panjang , titik akhir garis
       // doc.setLineWidth(0.01).line(0.5, 0.6, 8.0, 0.6);
@@ -215,27 +215,26 @@ new Vue({
       doc.autoTable({
         columns,
         body: bodycolom, //this.keranjangBarang,
-        margin: { left: 1.5, top: 7.0 },
+        margin: { left: 1.5, top: 6.0 },
         columnStyles: {
           'unitPriceTampil': { halign: "right" },
           'amountTampil': { halign: "right" },
         },
 
       });
-      let ln = (this.keranjangBarang.length * 0.8) + 8.5;
+      let ln = (this.keranjangBarang.length * 0.8) + 7.5;
       console.log('ini ln: ', this.keranjangBarang.length);
       doc.text('  Total: ' + this.totalBelanjaString + ',00', 15, ln);
-      doc.setFontStyle("normal").text('Terbilang: ' + this.terbilang(this.totalBelanjaAngka) + ' Rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
+      doc.setFontStyle("normal").text('Terbilang: ' + this.totalBelanjaTerbilang + ' rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
 
       doc
         .setFontSize(12)
         .setFontStyle('bold')
         .text('PEMBAYARAN DITRANSFER KE                                        TANDA TERIMA', 2.5, ln + 2);
-      doc.setLineWidth(0.02).line(2.5, ln + 2.1, 9.2, ln + 2.1);
       doc
         .setFontSize(12)
         .setFontStyle('normal')
-        .text('BCA. 0890800521 \nBNI. 0346396475 \na.n BAMBANG', 2.5, ln + 2.7);
+        .text('BCA. 0890800521 \nBNI. 0346396475 \na.n BAMBANG', 2.5, ln + 2.5);
 
       /*
       doc.output('save', 'filename.pdf'); //Try to save PDF as a file (not works on ie before 10, and some mobile devices)
@@ -269,14 +268,14 @@ new Vue({
         format: "a4"//letter"
       });
       // text is placed using x, y coordinates
-      doc.setFontSize(14).setFontStyle("bold").text('TOKO PLASTIK SAYA', 1.5, 1.5);
-      doc.setFontSize(12).setFontStyle("normal").text('PASURUAN \nTELP. 081336554778', 1.5, 2.5);
+      doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
+      doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. 081336554778', 1.5, 2.0);
       doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.0, 1.5);
-      doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 4.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
-      doc.setFontSize(12).setFontStyle("bold").text(`NO. FAKTUR \nTANGGAL/KIRIM \nTGL. JATUH TEMPO`, 12, 4.5);
-      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}` + `\n${this.kop.jthTempo}`, 17, 4.5);
+      doc.setFontSize(12).setFontStyle("bold").text(`NO. FAKTUR \nTANGGAL/KIRIM \nTGL. JATUH TEMPO`, 11, 3.5);
+      doc.setFontSize(12).setFontStyle("normal").text(`${this.kop.invoiceKe}` + `\n${this.kop.tgl}` + `\n${this.kop.jthTempo}`, 16, 3.5);
       // create a line under heading
       //titik awal garis , posisi tinggi garis , panjang , titik akhir garis
       // doc.setLineWidth(0.01).line(0.5, 0.6, 8.0, 0.6);
@@ -297,34 +296,26 @@ new Vue({
       doc.autoTable({
         columns,
         body: bodycolom, //this.keranjangBarang,
-        margin: { left: 1.5, top: 7.0 },
+        margin: { left: 1.5, top: 6.0 },
         columnStyles: {
           'unitPriceTampil': { halign: "right" },
           'amountTampil': { halign: "right" },
         },
 
       });
-      let ln = (this.keranjangBarang.length * 0.8) + 8.5;
+      let ln = (this.keranjangBarang.length * 0.8) + 7.5;
       console.log('ini ln: ', this.keranjangBarang.length);
       doc.text('  Total: ' + this.totalBelanjaString + ',00', 15, ln);
-      doc.setFontStyle("normal").text('Terbilang: ' + this.terbilang(this.totalBelanjaAngka) + ' Rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
+      doc.setFontStyle("normal").text('Terbilang: ' + this.totalBelanjaTerbilang + ' rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
 
       doc
         .setFontSize(12)
         .setFontStyle('bold')
         .text('PEMBAYARAN DITRANSFER KE                                        TANDA TERIMA', 2.5, ln + 2);
-      doc.setLineWidth(0.02).line(2.5, ln + 2.1, 9.2, ln + 2.1);
       doc
         .setFontSize(12)
         .setFontStyle('normal')
-        .text('BCA. 0890800521 \nBNI. 0346396475 \na.n BAMBANG', 2.5, ln + 2.7);
-
-      /*
-      doc.output('save', 'filename.pdf'); //Try to save PDF as a file (not works on ie before 10, and some mobile devices)
-      doc.output('datauristring');        //returns the data uri string
-      doc.output('datauri');              //opens the data uri in current window
-      doc.output('dataurlnewwindow');     //opens the data uri in new window
-      */
+        .text('BCA. 0890800521 \nBNI. 0346396475 \na.n BAMBANG', 2.5, ln + 2.5);
       doc.output('save', `${this.kop.invoiceKe}.pdf`);
     },
     /* Fungsi formatRupiah */
