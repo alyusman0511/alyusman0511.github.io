@@ -189,7 +189,7 @@ new Vue({
       // text is placed using x, y coordinates
       doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. 081336554778', 1.5, 2.0);
-      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.0, 1.5);
+      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 16.0, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
@@ -224,7 +224,7 @@ new Vue({
       });
       let ln = (this.keranjangBarang.length * 0.8) + 7.5;
       console.log('ini ln: ', this.keranjangBarang.length);
-      doc.text('  Total: ' + this.totalBelanjaString + ',00', 15, ln);
+      doc.text('  Total: ' + this.totalBelanjaString + ',00', 14, ln);
       doc.setFontStyle("normal").text('Terbilang: ' + this.totalBelanjaTerbilang + ' rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
 
       doc
@@ -270,7 +270,7 @@ new Vue({
       // text is placed using x, y coordinates
       doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. 081336554778', 1.5, 2.0);
-      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 17.0, 1.5);
+      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 16.0, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
@@ -305,7 +305,7 @@ new Vue({
       });
       let ln = (this.keranjangBarang.length * 0.8) + 7.5;
       console.log('ini ln: ', this.keranjangBarang.length);
-      doc.text('  Total: ' + this.totalBelanjaString + ',00', 15, ln);
+      doc.text('  Total: ' + this.totalBelanjaString + ',00', 14, ln);
       doc.setFontStyle("normal").text('Terbilang: ' + this.totalBelanjaTerbilang + ' rupiah.', 1.5, ln, { align: "left", maxWidth: "11.5" });
 
       doc
