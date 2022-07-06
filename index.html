@@ -23,7 +23,15 @@
               <v-card class="elevation-0" outline>
                 <v-card-text >
                   <v-row>
-                    <v-col cols="12" md="4">
+                    <v-col cols="4" md="2">
+                      <v-text-field
+                        label="No. Telepon Toko"
+                        ref="refKopTeleponToko"
+                        @keyup.enter="focusInputNama"
+                        v-model="kop.teleponToko"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="8" md="4">
                       <v-text-field
                         label="Nama"
                         v-model="kop.nama"
@@ -31,7 +39,7 @@
                         @keyup.enter="focusInputAlamat"
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12" md="8">
+                    <v-col cols="12" md="6">
                       <v-text-field
                         label="Alamat"
                         ref="refKopAlamat"
