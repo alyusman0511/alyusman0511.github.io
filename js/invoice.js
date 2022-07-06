@@ -196,7 +196,7 @@ new Vue({
       // text is placed using x, y coordinates
       doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. '+this.kop.teleponToko, 1.5, 2.0);
-      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 16.0, 1.5);
+      doc.setFontSize(14).setFontStyle("bold").text('INVOICE', 16.0, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
@@ -277,7 +277,7 @@ new Vue({
       // text is placed using x, y coordinates
       doc.setFontSize(14).setFontStyle("bold").setTextColor(6, 106, 156).text('TOKO PLASTIK SAYA', 1.5, 1.5);
       doc.setFontSize(12).setFontStyle("normal").setTextColor(0, 0, 0).text('PASURUAN \nTELP. '+this.kop.teleponToko, 1.5, 2.0);
-      doc.setFontSize(14).setFontStyle("bold").text('FAKTUR', 16.0, 1.5);
+      doc.setFontSize(14).setFontStyle("bold").text('INVOICE', 16.0, 1.5);
       doc.setFontSize(12).setFontStyle("bold").text(`KEPADA YTH.`, 1.5, 3.5);
       doc.setFontSize(12).setFontStyle("normal").text(`\n${this.kop.nama.toString().toUpperCase()}\n${this.kapitalisasiKata(this.kop.alamat)}\n${this.kop.telepon}`, 1.5, 3.5);
 
